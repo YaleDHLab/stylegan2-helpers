@@ -1,11 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
+# Exit if anything fails
 set -e
 
 # Load common vars
 . config.sh
-
-DATA_DIR="$PROJECT_PATH/datasets"
 
 echo "* Running StyleGAN2:dataset.py"
 echo "*     Image dir: $IMAGE_DIR"

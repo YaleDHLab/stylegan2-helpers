@@ -7,3 +7,5 @@ datasets
 test_img.py
 stylegan2
 fakes.avi
+generator-results
+projections

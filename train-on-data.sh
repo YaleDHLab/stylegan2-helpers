@@ -1,12 +1,17 @@
+set -e 
+
+# Load config variables
 . ./config.sh
 
-# --data-dir="/home/dhlab/EveryPixel/2020 Data/sg2/" \
+LATEST_SNAPSHOT=$(python latest-snapshot.py)
 
+echo "Using snapshot: $LATEST_SNAPSHOT"
+echo "Using data dir: $DATA_DIR"
 
 nohup python stylegan2/run_training.py \
     --num-gpus=1 \
-    --data-dir="/home/dhlab/sg2/" \
+    --data-dir="$DATA_DIR" \
     --config=config-f \
     --dataset=datasets \
-    --resume-pkl="results/00016-stylegan2-datasets-1gpu-config-f/network-snapshot-001065.pkl" \
+    --resume-pkl="$LATEST_SNAPSHOT" \
     --mirror-augment=true &
