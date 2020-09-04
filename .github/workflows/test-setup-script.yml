@@ -7,6 +7,13 @@ jobs:
     name: test setup.sh
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install Python
+        uses: actions/setup-python@v1
+        with:
+            python-version: '3.7'
+            architecture: 'x64'
       - name: Run setup.sh
         run: bash scripts/setup.sh
       - name: Enter virtualenv
