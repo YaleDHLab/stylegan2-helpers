@@ -18,11 +18,37 @@ Start here. You'll want to set some variables here that point to your files. How
 
 ### setup.sh
 
-Start here. This script sets up a Python virtual env and installs requirements.txt, and it clones a copy of StyleGAN 2. Currently we are using this [modified fork](https://github.com/ashirviskas/stylegan2.git) that adds features to resume training. 
+Start here. This script sets up a Python virtual env and installs requirements.txt, and it clones a copy of StyleGAN 2. Currently we are using this [modified fork](https://github.com/ashirviskas/stylegan2.git) that adds features to resume training.
+
+Now you need to activate your virtual environment to use the rest of the scripts
+
+```
+. venv/bin/activate
+```
+
+You should see your prompt changed with `(venv)` added to it.
+
+### resize-squares.py
+
+You need squares images that n^2 in either dimension, meaning 1024x1024, for example. If your input images are not in this format, use resize-squares.py. This will take images from your `RAW_IMAGE_DIR` with the `RAW_IMAGE_EXT` file extension and create an `IMAGE_DIR` filled with 1024x1024 crops. 
+
+If you already have these in this format and don't need to square your images, just manually set the `IMAGE_DIR` and don't run `resize-squares.py`.
+
+This script requires the env vars set by config.sh, so you can run:
+
+```bash 
+bash config ; python resize-squares.py
+```
 
 ### create-datasets.sh
 
 Creates the data sets from the data directory.
+
+```
+bash create-datasets.sh
+```
+
+This uses nohup, so you can safely disconnect your terminal session.
 
 ### train-on-data.sh
 
@@ -38,9 +64,6 @@ when you first start. You'll want to add a line line this when you need to resum
 
 Turn the results fake pngs into a video using openCV2.
 
-### resize-squares.py
-
-This was just a quick script I wrote to modify the original source images I received. This is very specific to the data and mostly remains as a reminder to myself.
 
 
 
