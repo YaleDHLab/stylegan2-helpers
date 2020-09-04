@@ -37,7 +37,7 @@ If you already have these in this format and don't need to square your images, j
 This script requires the env vars set by config.sh, so you can run:
 
 ```bash 
-bash config ; python resize-squares.py
+bash config.sh ; python scripts/resize-squares.py
 ```
 
 ### create-datasets.sh
@@ -45,7 +45,7 @@ bash config ; python resize-squares.py
 Creates the data sets from the data directory.
 
 ```
-bash create-datasets.sh
+bash scripts/create-datasets.sh
 ```
 
 This uses nohup, so you can safely disconnect your terminal session.
@@ -55,16 +55,26 @@ This uses nohup, so you can safely disconnect your terminal session.
 You'll want to delete the line:
 
 ```
-    --resume-pkl="results/00016-stylegan2-datasets-1gpu-config-f/network-snapshot-001065.pkl" \
+    --resume-pkl="$LATEST_SNAPSHOT" \
 ```
 
 when you first start. You'll want to add a line line this when you need to resume training, such as after a crash, but you'll need to point it to an appropriate file in your own results dir.
+
+Usage:
+
+```bash
+bash scripts/train-on-data.sh
+```
 
 ### compile-fakes-video.py
 
 Turn the results fake pngs into a video using openCV2.
 
+```bash
+bash scripts/compile-fakes-video.py
+```
 
+This assumes your results are in ./results, which they should be by default.
 
 
 
