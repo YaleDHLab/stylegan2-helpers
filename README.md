@@ -14,6 +14,11 @@ Except for `config.sh`, which is meant to be modified by the user, the scripts a
 
 Start here. You'll want to set some variables here that point to your files. However, not all of the scripts use these vars, and a nice improvement to this repo would be to replace hardcoded paths to pull these from the env vars set in this file.
 
+
+### get-max-dimensions.py
+
+If you don't know how big the source images are, and you have a huge folder of them, this script goes through each image and keeps track of the largest dimension so you can choose an appropriate IMAGE_DIMENSION value.
+
 ### setup.sh
 
 Start here. This script sets up a Python virtual env and installs requirements.txt, and it clones a copy of StyleGAN 2. Currently we are using this [modified fork](https://github.com/ashirviskas/stylegan2.git) that adds features to resume training. Hopefully this will be merged into the official branch.
