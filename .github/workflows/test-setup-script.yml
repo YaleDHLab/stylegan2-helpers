@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run setup.sh
-        run: bash scripts/setup.py
+        run: bash scripts/setup.sh
       - name: Enter virtualenv
         run: . venv/bin/activate
