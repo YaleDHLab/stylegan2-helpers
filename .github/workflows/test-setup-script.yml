@@ -1,0 +1,13 @@
+name: Test the setup script
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    name: test setup.sh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run setup.sh
+        run: bash setup.py
+      - name: Enter virtualenv
+        run: . venv/bin/activate
