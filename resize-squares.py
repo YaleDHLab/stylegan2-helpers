@@ -8,8 +8,18 @@ from matplotlib.pyplot import imsave
 from multiprocessing import Pool, cpu_count
 import io
 from PIL import Image
+import sys
 
-img_glob = '/home/dhlab/EveryPixel/2020 Data/output/consensus_good/*.png'
+RAW_IMAGE_DIR = os.environ["RAW_IMAGE_DIR"]
+RESIZE_DIR = os.environ["RESIZE_DIR"]
+RAW_IMAGE_EXT = os.environ["RAW_IMAGE_EXT"]
+
+print("Loaded conifg")
+print(RAW_IMAGE_DIR)
+print("resize_dir", RESIZE_DIR)
+print(RAW_IMAGE_EXT)
+
+img_glob = f'{RAW_IMAGE_DIR}/*.{RAW_IMAGE_EXT}'
 
 # nb:
 # np uses h,w,c
@@ -17,7 +27,7 @@ img_glob = '/home/dhlab/EveryPixel/2020 Data/output/consensus_good/*.png'
 
 width = 1024
 height = 1024
-out_dir = '/home/dhlab/EveryPixel/2020 Data/resized/{}-{}-crops'.format(width, height)
+out_dir = f'{RESIZE_DIR}/' + '{}-{}-crops'.format(width, height)
 
 if not os.path.exists(out_dir):
   os.makedirs(out_dir)
