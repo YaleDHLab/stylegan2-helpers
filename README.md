@@ -4,13 +4,11 @@
 
 ## Overview
 
-These scripts are meant to automate the process of setting up an environment and making fake images from a corpus of input images on a machine with a discrete GPU. Since this is a long-running task, these scripts make it easy to start and then restart whenever the process stops for one reason or another, such as a power outage, system or program crash.
+These scripts are meant to automate the process of setting up an environment and making fake images from a corpus of input images on a machine with a discrete GPU. Stylegan2 is very user-friendly, but it still takes a bit of setup, which I would forget and have to re-learn, so I just automated them. Since tasks run for a long time, these scripts make it easy to start and then restart whenever the process stops for one reason or another, such as a power outage, system or program crash. They also make it easy to log in, start the scripts, and log out without killing the process (by using nohup).
 
 ## Scripts
 
-These scripts won't work off the bat, but they document the process I went through to get this environment working on an ubuntu system with a discrete GPU.
-
-**NOTE: These scripts have hard coded file paths, so they need to be modified to work. Consider this your warning; I won't repeat in in each section below.**
+Except for `config.sh`, which is meant to be modified by the user, the scripts are in `/scripts/` within this repo.
 
 ### config.sh
 
@@ -18,7 +16,7 @@ Start here. You'll want to set some variables here that point to your files. How
 
 ### setup.sh
 
-Start here. This script sets up a Python virtual env and installs requirements.txt, and it clones a copy of StyleGAN 2. Currently we are using this [modified fork](https://github.com/ashirviskas/stylegan2.git) that adds features to resume training.
+Start here. This script sets up a Python virtual env and installs requirements.txt, and it clones a copy of StyleGAN 2. Currently we are using this [modified fork](https://github.com/ashirviskas/stylegan2.git) that adds features to resume training. Hopefully this will be merged into the official branch.
 
 Now you need to activate your virtual environment to use the rest of the scripts
 
