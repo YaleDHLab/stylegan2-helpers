@@ -28,7 +28,7 @@ You should see your prompt changed with `(venv)` added to it.
 
 ### resize-squares.py
 
-You need squares images that n^2 in either dimension, meaning 1024x1024, for example. If your input images are not in this format, use resize-squares.py. This will take images from your `RAW_IMAGE_DIR` with the `RAW_IMAGE_EXT` file extension and create an `IMAGE_DIR` filled with 1024x1024 crops. 
+You need squares images that 2^n in either dimension, meaning n = 128, 256, 512, 1024x1024, for example. If your input images are not in this format, use resize-squares.py. This will take images from your `RAW_IMAGE_DIR` with the `RAW_IMAGE_EXT` file extension and create an `IMAGE_DIR` filled with NxN crops. 
 
 If you already have these in this format and don't need to square your images, just manually set the `IMAGE_DIR` and don't run `resize-squares.py`.
 

@@ -8,7 +8,10 @@ echo "Loading configuration..."
 # Image pre-processing
 #######################################
 
-# Note: if you already have 1024-1024 images
+# Make the images NxN width x height
+export IMAGE_DIMENSION=128
+
+# Note: if you already have NxN images
 # you can ignore the top three variables (or
 # comment them out) and just set IMAGE_DIR
 
@@ -18,7 +21,7 @@ export RESIZE_DIR=/home/dhlab/faces/Datasets/Photogrammar-FaceNet/fsa_faces_resi
 
 # This is where your images lives that are ready 
 # for turning into data sets 
-export IMAGE_DIR=$RESIZE_DIR/1024-1024-crops
+export IMAGE_DIR=$RESIZE_DIR/$IMAGE_DIMENSION-$IMAGE_DIMENSION-crops
 
 
 #######################################

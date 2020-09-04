@@ -9,12 +9,15 @@ from multiprocessing import Pool, cpu_count
 import io
 from PIL import Image
 import sys
+from progress.bar import Bar
+
 
 RAW_IMAGE_DIR = os.environ["RAW_IMAGE_DIR"]
 RESIZE_DIR = os.environ["RESIZE_DIR"]
 RAW_IMAGE_EXT = os.environ["RAW_IMAGE_EXT"]
+IMAGE_DIMENSION = int(os.environ["IMAGE_DIMENSION"])
 
-print("Loaded conifg")
+print("Loaded config")
 print(RAW_IMAGE_DIR)
 print("resize_dir", RESIZE_DIR)
 print(RAW_IMAGE_EXT)
@@ -25,9 +28,10 @@ img_glob = f'{RAW_IMAGE_DIR}/*.{RAW_IMAGE_EXT}'
 # np uses h,w,c
 # keras uses w,h,c
 
-width = 1024
-height = 1024
+width = IMAGE_DIMENSION # 1024
+height = width # 1024
 out_dir = f'{RESIZE_DIR}/' + '{}-{}-crops'.format(width, height)
+print(f"Saving to: {out_dir}")
 
 if not os.path.exists(out_dir):
   os.makedirs(out_dir)
@@ -53,9 +57,15 @@ def crop(img):
 total_images = len(glob.glob(img_glob))
 done_images = 0
 last_message = 0
+
+image_file_names = glob.glob(img_glob)
+bar = Bar('Processing', max=len(image_file_names))
+
 def process_image(i):
   global done_images, last_message
   done_images += 1
+  bar.next()
+
   path = os.path.join(out_dir, '{}-{}-cropped-'.format(width, height) + os.path.basename(i))
   if os.path.exists(path): return
   j = load_img(i, color_mode='grayscale')
@@ -76,7 +86,7 @@ def process_image(i):
   if done_images % 100 == 0 :
     total_done_images = len(os.listdir(out_dir))
     pct_done = total_done_images * 100 / total_images
-    print(str(int(pct_done)) + r"% completed (" + str(total_done_images) + "/" + str(total_images) + ")")
+    # print(str(int(pct_done)) + r"% completed (" + str(total_done_images) + "/" + str(total_images) + ")")
   z[pad_top:pad_top+h, pad_side:pad_side+w] = arr
   
   # save the cropped image
@@ -91,6 +101,8 @@ def process_image(i):
 cpus_to_use = int(cpu_count() / 2)
 print("Using " + str(cpus_to_use) + " cpus")
 with Pool(cpus_to_use) as p:
-    p.map(process_image, glob.glob(img_glob))
+    p.map(process_image, image_file_names)
+
+bar.finish()
 # for i in glob.glob(img_glob):
 #    process_image(i)
